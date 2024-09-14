@@ -226,6 +226,21 @@ namespace RedUtils
 			_hitboxOffset = playerInfo.HitboxOffset.HasValue ? new Vec3(playerInfo.HitboxOffset.Value) : _hitboxOffset;
 		}
 
+		public void UpdateStateSetter(Vec3 location, Vec3 velocity, Vec3 Rotation, Mat3x3 orientation, int boost)
+		{
+			//need angular velocity
+			Location = location;
+			Velocity = velocity;
+			this.Rotation = Rotation;
+			Orientation = orientation;
+			Boost = boost;
+			IsBot = true;
+			HasJumped = false;
+			HasDoubleJumped = false;
+			IsDemolished = false;
+			IsSupersonic = false;
+		}
+
 		/// <summary>Gives the vector back in local coordinates relative to the car. 
 		/// <para>x is now towards where the car is facing, y is towards the right of the car, and z is where the roof of the car is facing</para>
 		/// </summary>

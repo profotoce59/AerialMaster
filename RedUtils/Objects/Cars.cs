@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using rlbot.flat;
 using RedUtils.Math;
+using RedUtils.StateSetting;
 
 namespace RedUtils
 {
@@ -40,6 +41,34 @@ namespace RedUtils
 			foreach (Car car in AllCars)
 			{
 				car.Update(packet.Players(car.Index).Value);
+			}
+		}
+
+		public static void StateSet(StateEntity state)
+		{
+			AllCars = new List<Car>();
+			//le for avec un enumerate
+			for (int i = 0; i < state.blueTeam.Length; i++)
+			{
+				Car player = state.blueTeam[i];
+				BlueCars[i].UpdateStateSetter(
+					player.Location,
+				 	player.Velocity,
+				 	player.Rotation,
+				   	player.Orientation,
+				    player.Boost
+					);
+			}
+			for (int i = 0; i < state.orangeTeam.Length; i++)
+			{
+				Car player = state.orangeTeam[i];
+				OrangeCars[i].UpdateStateSetter(
+					player.Location,
+				 	player.Velocity,
+				 	player.Rotation,
+				   	player.Orientation,
+				    player.Boost
+					);
 			}
 		}
 	}

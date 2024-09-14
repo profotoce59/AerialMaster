@@ -85,5 +85,27 @@ namespace RedUtils.Math
 					cos + u.z * u.z * n1Cos)
 			);
 		}
+		private Mat3x3 QuaternionToMat3x3(float w, float x, float y, float z)
+    {
+        return  new Mat3x3(
+			new Vec3(
+				1 - 2 * (y * y + z * z),
+				2 * (x * y - z * w),
+				2 * (x * z + y * w)
+				),
+			new Vec3(
+				2 * (x * y + z * w),
+				1 - 2 * (x * x + z * z),
+				2 * (y * z - x * w)
+				),
+			new Vec3(
+				2 * (x * z - y * w),
+				2 * (y * z + x * w),
+				1 - 2 * (x * x + y * y)
+				)
+		);
+        
+
+    	}
 	}
 }

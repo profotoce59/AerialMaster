@@ -325,6 +325,23 @@ namespace RedUtils.Math
 			}
 			return start.FlatNorm(up) * Flatten(up).Length() + up * Dot(up);
 		}
+		private Vec3 QuaternionToEuler(float w, float x, float y, float z)
+    {
+			Vec3 v = new Vec3();
+			float sinp = 2 * (w * x + y * z);
+			float cosp = 1 - 2 * (x * x + y * y);
+			v.x = MathF.Atan2(sinp, cosp);
+
+			float siny = 2 * (w * y - z * x);
+			v.y = MathF.Abs(siny) >= 1 ? MathF.CopySign(MathF.PI / 2, siny) : MathF.Asin(siny);
+
+			float sinr = 2 * (w * z + x * y);
+			float cosr = 1 - 2 * (y * y + z * z);
+			v.z = MathF.Atan2(sinr, cosr);
+
+			return v;
+    }
+
 		/// <summary>Rotates the vector around the z axis in the counter-clockwise direction</summary>
 		public Vec3 Rotate(float angle)
 		{

@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch Project1",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/Bot/bin/Debug/net6.0/RLBot_Core_Interface.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/Bot",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": ".NET Core Launch Project2",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceRoot}/Test/bin/Debug/net6.0/RLBot_Core_Interface.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/Test",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ]
+}

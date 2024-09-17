@@ -65,6 +65,13 @@ namespace RedUtils
 			Prediction = bot.GetBallPrediction();
 		}
 
+		public static void Update(Vec3 location, Vec3 velocity, Vec3 angularVelocity)
+		{
+			Location = location;
+			Velocity = velocity;
+			AngularVelocity = angularVelocity;
+		}
+
 		/// <summary>Predicts the state of this ball instance. Note that this ignores walls and cars</summary>
 		public Ball Predict(float time)
 		{

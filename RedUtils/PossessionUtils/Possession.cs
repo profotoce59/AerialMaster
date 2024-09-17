@@ -22,34 +22,34 @@ namespace RedUtils
         /// <param name="opponents">Liste des adversaires</param>
         /// <param name="ball">Position et mouvement de la balle</param>
         /// <returns>Le statut de la possession</returns>
-		public static PossessionStatus HasPossession(Car myCar, Car[] teamMates, Car[] opponents, Ball ball)
+		public static PossessionStatus HasPossession(FieldParameters fieldParameters)
 		{
-			return car.Location.Dist(ball.Location) < threshold;
-		}
-
-		 public static float GetTimeToReachBall(Car car, Ball ball)
-        {
-            Vec3 relativePosition = ball.location - car.Location; // Position relative de la balle par rapport à la voiture
-            Vec3 relativeVelocity = ball.velocity - car.Velocity; // Vitesse relative entre la voiture et la balle
-
-            // Angle entre la direction de la voiture et la direction vers la balle
-            float angleToBall = AngleBetween(car.Velocity, relativePosition);
-            float currentSpeed = car.Velocity.Length();
-
-            // Si la voiture est déjà à la vitesse max
-            if (currentSpeed >= Car.MaxSpeed)
+            float myTime = TimeToReachBall(fieldParameters.MyCar);
+            float teamMateTime = float.MaxValue;
+            float opponentTime = float.MaxValue;
+            foreach (Car car in fieldParameters.TeamMates)
             {
-                return TimeToReachMovingTarget(relativePosition, relativeVelocity, Car.MaxSpeed);
+                teamMateTime = MathF.Min(teamMateTime, TimeToReachBall(car));
+            }
+            foreach (Car car in fieldParameters.Opponents)
+            {
+                opponentTime = MathF.Min(opponentTime, TimeToReachBall(car));
             }
 
-            // Sinon on calcule en prenant en compte l'accélération
-            float timeToMaxSpeed = (Car.MaxSpeed - currentSpeed) / Car.BoostAccel;
-            float distanceDuringAcceleration = currentSpeed * timeToMaxSpeed + 0.5f * Car.BoostAccel * timeToMaxSpeed * timeToMaxSpeed;
 
-            // Prédiction en fonction de la vitesse relative de la balle et de la voiture
-            float predictedTimeToReach = TimeToReachMovingTarget(relativePosition, relativeVelocity, MaxCarSpeed);
-
-            return predictedTimeToReach;
+            if (myTime < teamMateTime)
+            {
+                if (myTime < opponentTime)
+                {
+                    return PossessionStatus.MyPossession;
+                }
+                else return PossessionStatus.OpponentPossessionButClosest;
+            }
+            if (teamMateTime < myTime && teamMateTime < opponentTime)
+            {
+                return PossessionStatus.TeammatePossession;
+            }
+            return PossessionStatus.OpponentPossession;
         }
 
         /// <summary>

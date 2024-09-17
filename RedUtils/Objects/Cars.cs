@@ -9,6 +9,7 @@ namespace RedUtils
 	/// <summary>Contains static properties on the cars currently in the game</summary>
 	public static class Cars
 	{
+		public static int frame = 0;
 		/// <summary>How many cars are currently in the game</summary>
 		public static int Count => AllCars.Count;
 		/// <summary>All the cars in the game, including cars that are respawning</summary>
@@ -44,8 +45,14 @@ namespace RedUtils
 			}
 		}
 
-		public static void StateSet(StateEntity state)
+		public static void StateSet(StateEntity state, int frame)
 		{
+			//permet de ne pas le relancer pour chaque bot
+			if (Cars.frame == frame)
+			{
+				return;
+			}
+			Cars.frame = frame;
 			AllCars = new List<Car>();
 			//le for avec un enumerate
 			for (int i = 0; i < state.blueTeam.Length; i++)

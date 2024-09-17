@@ -11,7 +11,7 @@ using RedUtils.StateSetting;
  * The run function listed below runs every tick, and should contain the custom strategy code (made by you!)
  * Right now though, it has a default ball chase strategy. Feel free to read up and use anything you like for your own strategy.
 */
-namespace Bot
+namespace Test
 {
     // Your bot class! :D
     public class RedBot : RUBot
@@ -36,13 +36,13 @@ namespace Bot
 
                 Action = goingForKickoff ? new Kickoff() : new GetBoost(Me, interruptible: false); // if we aren't going for the kickoff, get boost
             }
-            else if (Action == null || (Action is Drive && Action.Interruptible))
+            else
             {
-                // search for the first avaliable shot using DefaultShotCheck
-                Shot shot = FindShot(DefaultShotCheck, new Target(TheirGoal));
-
-                // if a shot is found, go for the shot. Otherwise, if there is an Action to execute, execute it. If none of the others apply, drive back to goal.
-                Action = shot ?? Action ?? new Drive(Me, OurGoal.Location);
+                TestSuite testSuite = new TestSuite("Test HasPossession");
+                // lance les tests
+                
+                testSuite.Run();
+                
 			}
         }
     }

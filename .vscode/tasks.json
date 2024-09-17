@@ -1,0 +1,42 @@
+{
+    "version": "2.0.0",
+    "command": "dotnet",
+    "args": [],
+    "tasks": [
+        {
+            "label": "Run Bot",
+            "type": "shell",
+            "command": "dotnet build",
+            "args": [
+                "${workspaceRoot}/Bot/Bot.csproj"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Test Bot",
+            "type": "shell",
+            "command": "dotnet build",
+            "args": [
+                "${workspaceRoot}/Test/Test.csproj"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "msbuild",
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": "build",
+            "label": "Build: Test.csproj",
+            "detail": "Build the Test.csproj project using dotnet build"
+        }
+    ]
+}

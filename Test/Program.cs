@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bot
+namespace Test
 {
     class Program
     {
@@ -10,7 +10,7 @@ namespace Bot
             try
             {
                 // Read the port from the first argument
-                port = int.Parse(args[0]);
+                port = 36969;
             }
             catch (Exception)
             {

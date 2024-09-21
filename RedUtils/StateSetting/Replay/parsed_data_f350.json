@@ -2,14 +2,14 @@
     "frame": 350,
     "ball": {
         "position": {
-            "x": "2284.31",
-            "y": "2484.97",
-            "z": "546.42"
+            "x": 2284.31,
+            "y": 2484.97,
+            "z": 546.42
         },
         "velocity": {
-            "x": "887.21",
-            "y": "-391.23",
-            "z": "-708.33"
+            "x": 887.21,
+            "y": -391.23,
+            "z": -708.33
         }
     },
     "players": [
@@ -31,7 +31,8 @@
                 "z": 0.26402506
             },
             "boost": 81.960785,
-            "is_orange": true
+            "is_orange": true,
+            "name": "AztraL"
         },
         {
             "position": {
@@ -51,7 +52,8 @@
                 "z": 0.5035496
             },
             "boost": 17.647058,
-            "is_orange": false
+            "is_orange": false,
+            "name": "RelatingWave"
         },
         {
             "position": {
@@ -71,7 +73,8 @@
                 "z": 0.62294763
             },
             "boost": 44.313725,
-            "is_orange": true
+            "is_orange": true,
+            "name": "ViolentPanda"
         },
         {
             "position": {
@@ -91,7 +94,8 @@
                 "z": -0.6439604
             },
             "boost": 57.2549,
-            "is_orange": true
+            "is_orange": true,
+            "name": "Yukeo"
         },
         {
             "position": {
@@ -111,7 +115,8 @@
                 "z": 0.83132136
             },
             "boost": 77.0576,
-            "is_orange": false
+            "is_orange": false,
+            "name": "Virtuoso"
         },
         {
             "position": {
@@ -131,7 +136,8 @@
                 "z": 0.6172291
             },
             "boost": 100.0,
-            "is_orange": false
+            "is_orange": false,
+            "name": "Nachitow"
         }
     ]
 }

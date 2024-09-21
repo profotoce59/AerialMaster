@@ -55,7 +55,7 @@ namespace RedUtils
 			Cars.frame = frame;
 			AllCars = new List<Car>();
 			//le for avec un enumerate
-			for (int i = 0; i < state.blueTeam.Length; i++)
+			for (int i = 0; i < state.blueTeam.Count; i++)
 			{
 				Car player = state.blueTeam[i];
 				BlueCars[i].UpdateStateSetter(
@@ -66,7 +66,7 @@ namespace RedUtils
 				    player.Boost
 					);
 			}
-			for (int i = 0; i < state.orangeTeam.Length; i++)
+			for (int i = 0; i < state.orangeTeam.Count; i++)
 			{
 				Car player = state.orangeTeam[i];
 				OrangeCars[i].UpdateStateSetter(

@@ -10,16 +10,29 @@ namespace RedUtils.StateSetting
 {
     public class StateEntity
     {
-        public Car[] blueTeam { get; set; }
-        public Car[] orangeTeam { get; set; }
+        public List<Car> blueTeam { get; set; }
+        public List<Car> orangeTeam { get; set; }
         public Ball Ball { get; set; }
 
         public StateEntity(string replayFolder, int frame)
         {
-            JsonDocument jsonFrame = this.ParseJSON(replayFolder, frame);
+            blueTeam = new List<Car>();
+            orangeTeam = new List<Car>();
+            JsonDocument jsonFrame = ParseJSON(replayFolder, frame);
             JsonElement root = jsonFrame.RootElement;
-            this.verifyFrame(root);
-            this.BuildTeam(root);      
+            if(verifyFrame(root)){
+                Console.WriteLine("Frame verified");
+                BuildTeam(root);  
+                BuildBall(root); 
+            }
+            else
+            {
+                Console.WriteLine("Frame not verified");
+                throw new Exception("Invalid frame data");
+            }
+            Console.WriteLine("blueTeam" + blueTeam.Count);
+            Console.WriteLine("blueTeam" + blueTeam[0].Location);
+               
         }
         private JsonDocument ParseJSON(string replayFolder, int frame){
             string frameFile = replayFolder + "/parsed_data_f" + frame + ".json";
@@ -107,11 +120,13 @@ namespace RedUtils.StateSetting
                     // Vérifier si le joueur est dans l'équipe orange
                     if (player.TryGetProperty("is_orange", out JsonElement isOrange) && isOrange.GetBoolean())
                     {
-                        this.orangeTeam.Append(car); // Ajouter à l'équipe orange
+                        //
+                        
+                        orangeTeam.Add(car); // Ajouter à l'équipe orange
                     }
                     else
                     {
-                        this.blueTeam.Append(car); // Ajouter à l'équipe bleue
+                        blueTeam.Add(car); // Ajouter à l'équipe bleue
                     }
                 }
             }
@@ -121,14 +136,11 @@ namespace RedUtils.StateSetting
             }
 }
 
-        private void BuildBall(JsonElement jsonFrame)
-{
+        private void BuildBall(JsonElement jsonFrame){
     // Vérification et extraction de l'élément "ball"
-    if (jsonFrame.TryGetProperty("ball", out JsonElement ballElement))
-    {
+    if (jsonFrame.TryGetProperty("ball", out JsonElement ballElement)){
         // Extraire la position de la balle
-        if (ballElement.TryGetProperty("position", out JsonElement positionElement))
-        {
+        if (ballElement.TryGetProperty("position", out JsonElement positionElement)){
             Vec3 position = new Vec3(
                 positionElement.GetProperty("x").GetSingle(),
                 positionElement.GetProperty("y").GetSingle(),
@@ -136,8 +148,7 @@ namespace RedUtils.StateSetting
             );
 
             // Extraire la vitesse de la balle
-            if (ballElement.TryGetProperty("velocity", out JsonElement velocityElement))
-            {
+            if (ballElement.TryGetProperty("velocity", out JsonElement velocityElement)){
                 Vec3 velocity = new Vec3(
                     velocityElement.GetProperty("x").GetSingle(),
                     velocityElement.GetProperty("y").GetSingle(),
@@ -145,28 +156,24 @@ namespace RedUtils.StateSetting
                 );
 
                 // Créer un nouvel objet Ball avec la position et la vitesse
-                this.Ball = new Ball(position, velocity);
+                Ball = new Ball(position, velocity);
             }
-            else
-            {
+            else{
                 Console.WriteLine("Missing 'velocity' field for the ball.");
             }
         }
-        else
-        {
+        else{
             Console.WriteLine("Missing 'position' field for the ball.");
         }
     }
-    else
-    {
+    else{
         Console.WriteLine("Missing 'ball' field in the JSON frame.");
     }
 }
 
         // Vérifie que le nombre de joueurs est pair et entre 2 et 6
         private bool VerifyPlayerCount(int nbPlayers){
-            if (nbPlayers % 2 != 0 || nbPlayers < 2 || nbPlayers > 6)
-            {
+            if (nbPlayers % 2 != 0 || nbPlayers < 2 || nbPlayers > 6){
                 Console.WriteLine("Invalid number of players: " + nbPlayers);
                 return false;
             }

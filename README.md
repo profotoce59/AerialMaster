@@ -64,3 +64,14 @@ Then, the C# bot server controls the bot through the `RLBot_Core_Interface` DLL.
 -  [ddthj/GoslingUtils](https://github.com/ddthj/GoslingUtils) for inspiration on some of the structure and code (which I ported to c#)
 -  [VirxEC/VirxERLU](https://github.com/VirxEC/VirxERLU) for the basis of my aerial code (which I ported to c#)
 -  [Darxeal/BotimusPrime](https://github.com/Darxeal/BotimusPrime) for inspiration on some of the structure and driving code (which I ported to c#)
+
+
+Pour le replay de test les joueurs correspondent à cela : 
+0 : Aztral (o)
+1 : ViolentPanda (o)
+2 : Yukeo (o)
+3 : RelatingWave (b)
+4 : Virtuoso (b)
+5 : Nachitow (b)
+
+1 frame correspond à x secondes dans le replay
